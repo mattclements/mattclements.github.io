@@ -1,0 +1,82 @@
+/* -------- *
+ * $GLOBALS *
+ * -------- */
+
+/**
+ * RESET ALL THE THINGS! (barbarian style)
+ * 1. Include pseudo-elements which are not target by * 
+ * 2. Apply proper box-sizing to all elements
+ * 3. Barbarian reset
+ */
+*,
+*:before, 
+*:after {                            /* 1 */
+	@include box-sizing(border-box); /* 2 */
+	padding: 0;                      /* 3 */
+	margin: 0;                       /* 3 */
+}
+
+/**
+ * Document root
+ * 1. 62.5% equals 10 px; used as a baseline for REM unit
+ */
+html {
+	font: 62.5% "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif; /* 1 */
+	color: #555;
+	text-shadow: 0 1px rgba(255,255,255,.6);
+	border-left: 6px solid $main-color;
+	
+	@include breakpoint(small) { 
+		border-left: none;
+		border-top: 5px solid $main-color;
+	}
+}
+
+/**
+ * Shake your <body>
+ * 1. 20px, used as a baseline for EM unit
+ */
+body {
+	@include rem(2); /* 1 */ 
+}
+
+/**
+ * Links
+ */
+a {
+	color: $main-color;
+	text-decoration: none;
+	
+	&:hover, &:focus {
+		text-decoration: underline;
+	}
+}
+
+/**
+ * User selection
+ */
+::-moz-selection { 
+	background: $main-color; 
+	color: white;
+}
+
+::selection      { 
+	background: $main-color; 
+	color: white;
+}
+
+
+/**
+ * Disqus fix
+ */
+#disqus_thread {
+	margin-top: 3.5em;
+}
+
+.job-title {
+	font-size: .9em;
+	color: #999;
+	font-style: italic;
+	position: relative;
+	top: -.5em;
+}
