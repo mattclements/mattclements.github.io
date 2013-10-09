@@ -25,6 +25,8 @@ html {
 	color: #555;
 	text-shadow: 0 1px rgba(255,255,255,.6);
 	border-left: 6px solid $main-color;
+
+	height: 100%;
 	
 	@include breakpoint(small) { 
 		border-left: none;
