@@ -55,6 +55,10 @@ a {
 	&:hover, &:focus {
 		text-decoration: underline;
 	}
+
+	.section-anchor:hover, .section-anchor:focus {
+		text-decoration: none;
+	}
 }
 
 /**
