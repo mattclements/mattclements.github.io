@@ -49,10 +49,10 @@
 	text-transform: none;
 	font-weight: bold;
 	padding: .25em 0 0 3.8em;
-	@include rem(4);
+	@include font-size(4);
 
 	@include breakpoint(small) {
-		@include rem(2.8);
+		@include font-size(2.8);
 		float: none;
 		text-align: center;
 	}

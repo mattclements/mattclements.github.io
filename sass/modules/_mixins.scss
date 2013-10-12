@@ -6,9 +6,9 @@
  * Mixin providing a PX fallback for REM font-sizes
  * Source: http://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/
  */
-@mixin rem($val) {
-	font-size: ($val * 10) + px;
-	font-size: $val + rem;
+@mixin font-size($sizeValue: 1.6) {
+	font-size: ($sizeValue * 10) + px;
+  	//font-size: $sizeValue + rem;
 }
 
 /**

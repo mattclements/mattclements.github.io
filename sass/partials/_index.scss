@@ -45,7 +45,7 @@
 .list-articles__title {
 	margin: 0;
 	padding: .25em 3.25em .25em 0;
-	@include rem(2.8);
+	@include font-size(2.8);
 	
 	@include breakpoint(small) {
 		padding: .25em 0;
@@ -56,7 +56,7 @@
  * Article dates in the list
  */
 .list-articles__date {
-	@include rem(1.7);
+	@include font-size(1.7);
 	text-indent: 3px;
 	margin-bottom: 0;
 	color: $lightgrey;

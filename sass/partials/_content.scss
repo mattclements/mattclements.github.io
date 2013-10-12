@@ -19,17 +19,17 @@ h4, .h4 {
 }
 
 h1, .h1 {
-	@include rem(3.6);
+	@include font-size(3.6);
 	font-family: 'Lato', sans-serif;
 	margin: 1em 0 0 0;
 
 	@include breakpoint(small) {
-		@include rem(3.2);
+		@include font-size(3.2);
 	}
 }
 
 h2, .h2 {
-	@include rem(3.2);
+	@include font-size(3.2);
 
 	.page--resume & {
 		border-bottom: 1px solid silver;
@@ -59,14 +59,14 @@ h2, .h2 {
 }
 
 h3, .h3 {
-	@include rem(2.6);
+	@include font-size(2.6);
 	letter-spacing: 1px;
 	font-style: italic;
 	text-transform: uppercase;
 }
 
 h4, .h4 {
-	@include rem(2.4);
+	@include font-size(2.4);
 }
 
 /**
@@ -85,7 +85,7 @@ h4, .h4 {
 
 	h2 {
 		margin: .1em 0 .35em;
-		@include rem(2.4);
+		@include font-size(2.4);
 	}
 
 	@include breakpoint(small) {

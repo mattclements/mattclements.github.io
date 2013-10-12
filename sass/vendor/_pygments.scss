@@ -31,7 +31,7 @@
 	@include hyphens(none); /* 4 */
 
 	@include breakpoint(small) {
-		@include rem(1.5);  /* 5 */
+		@include font-size(1.5);  /* 5 */
 	}
 
 	.hll { 
