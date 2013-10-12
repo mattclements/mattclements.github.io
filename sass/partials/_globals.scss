@@ -16,17 +16,19 @@
 	margin: 0;                       /* 3 */
 }
 
+html, body {
+    min-height: 100%;
+}
+
 /**
  * Document root
  * 1. 62.5% equals 10 px; used as a baseline for REM unit
  */
 html {
-	font: 62.5% "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif; /* 1 */
+	font: 62.5% 'Lato', sans-serif; /* 1 */
 	color: #555;
 	text-shadow: 0 1px rgba(255,255,255,.6);
 	border-left: 6px solid $main-color;
-
-	height: 100%;
 	
 	@include breakpoint(small) { 
 		border-left: none;
