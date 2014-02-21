@@ -1,0 +1,18 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Matt Clements": "Freelance Developer"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.7610821723937987,
+          52.03353819984969
+        ]
+      }
+    }
+  ]
+}
