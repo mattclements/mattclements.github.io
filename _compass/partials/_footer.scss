@@ -1,0 +1,72 @@
+/* ------- *
+ * $FOOTER *
+ * ------- */
+
+/* Drop the share links in the space to the right.
+Doing it like this means it's easier for the author bio
+to be flexible at smaller screen sizes while the share
+links remain at a fixed width the whole time */
+
+.post-footer .share a {
+	font-size: 1.8rem;
+	display: inline-block;
+	margin: 1rem 1.6rem 1.6rem 0;
+	color: #BBC7CC;
+	text-decoration: none;
+}
+
+.post-footer .share a:hover {
+	color: #50585D;
+}
+
+/**
+ * Footer element
+ * 1. Clear .main and .sidebar floats
+ */
+.footer {
+	@extend %clearfix;
+	@include font-size(1.4);
+	clear: both; /* 1 */
+	padding: 2.5em 0;
+	border-top: 3px solid #D1D1D1;
+
+	p {
+		float: left;
+
+		@include breakpoint(small) {
+			float: none;
+		}
+	}
+
+	a {
+		color: $mediumgrey;
+		text-decoration: none;
+	}
+
+	@include breakpoint(small) {
+		text-align: center;
+	}
+}
+
+/**
+ * Footer navigation
+ */
+.footer-nav {
+	@extend %clearfix;
+	float: right;
+
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	li {
+		display: inline;
+		margin: 0 .25em;
+	}
+
+	@include breakpoint(small) {
+		float: none;
+		padding: 0;
+	}
+}

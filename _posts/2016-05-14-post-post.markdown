@@ -1,0 +1,7 @@
+---
+layout: post
+title: Cascading soft deletes with Eloquent
+date: '2016-05-14 11:15:57'
+---
+
+I can see an awesome use for this [Laravel Package](https://dyrynda.com.au/blog/cascading-soft-deletes-with-laravel-and-eloquent)

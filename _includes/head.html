@@ -1,36 +1,23 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ page.title }}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="author" content="Matt Clements">
-    <meta name="description" content="Matt Clements">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
 
-    <link rel="dns-prefetch" href="//www.google-analytics.com">
-	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://mattclements.co.uk/feeds/feed.xml" />
+  <link rel="stylesheet" href="{{ "/css/screen.css" | relative_url }}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
 
-    <link rel="icon" href="/favicon.png">
-	<!--[if IE]><link rel="shortcut icon" href="/favicon.ico"><![endif]-->
+  <!--[if lt IE 9]>  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-	<link rel="apple-touch-icon" href="/apple-touch-icon-iphone.png" /> 
-	<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-ipad.png" /> 
-	<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-iphone4.png" />
-	<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-ipad3.png" />
-
-	<meta name="geo.region" content="GB-MIK" />
-	<meta name="geo.placename" content="Milton Keynes" />
-	<meta name="geo.position" content="52.004494;-0.796182" />
-	<meta name="ICBM" content="52.004494, -0.796182" />
-
-	<link rel='stylesheet' href='/stylesheets/screen.css'>
-	<!--[if lte IE 7]> <link rel="stylesheet" type="text/css" href="/stylesheets/ie.css">   <![endif]-->
-	<!--[if lt IE 9]>  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-</head>  
-<body class="page {{ page.page-class }}">
-<div class="wrapper">
+  <meta name="geo.region" content="GB-MIK" />
+  <meta name="geo.placename" content="Milton Keynes" />
+  <meta name="geo.position" content="52.004494;-0.796182" />
+  <meta name="ICBM" content="52.004494, -0.796182" />
+  
+  {% if jekyll.environment == 'production' and site.google_analytics %}
+  {% include google-analytics.html %}
+  {% endif %}
+</head>

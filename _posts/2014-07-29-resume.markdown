@@ -1,0 +1,49 @@
+---
+layout: post
+title: Resume
+date: '2014-07-29 20:24:48'
+---
+
+##Experience
+####Debit Finance Collections Plc (2009 - Current) - IT Development Manager
+Working on developing and maintaining a number of systems and 
+applications within the company such as integration using SOAP & Restful Web 
+Services (both Server & Client), iOS Applications for current clients and PHP interface signup 
+process for new clients including developing heavily with the Laravel framework.
+
+####Freelance - (2004 - Current) - Web Developer
+I have been working on many sites during the past nine years as either 
+Laravel/PHP/MySQL &amp; HTML developer, or Server administration. Some of these 
+include:
+
+* Yellowstone (Linux Server Administration)
+* Selective Lets (Web Design &amp; System Integration)
+* Clarity of Sight (ZenCart Web Development)
+* GO International (SEO Work &amp; Website Redesign)
+
+####Personal Projects
+* [Prepros](http://alphapixels.com/prepros/) Open Source Precompiler (Port to OSX)
+* [advEmail](https://github.com/mattclements/advEmail) PHP Email Library
+
+---
+
+##Skills
+####Programming languages
+PHP, Laravel, MySQL, HTML, CSS (SASS), JavaScript & jQuery, Oracle SQL/PLSQL, Objective-C (iOS/OSX), Python
+
+####Software Tools
+PHPStorm, Sublime Text 3, Git, Photoshop
+
+####Methodologies
+PRINCE2, Agile/XP
+
+---
+
+##Education
+
+####University of Bedfordshire (2008 - 2011)
+* 1st Class - Computer Science BSc (Hons)
+
+####Stratton Upper Sixth Form (2004 - 2008)
+* A-Level Systems & Control: C
+* BTec National Certificate in Computing: Double Merit

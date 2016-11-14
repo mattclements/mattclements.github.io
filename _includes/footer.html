@@ -1,11 +1,10 @@
 <footer class="footer" role="contentinfo">
-    <ul class="footer__nav">
-    	<li><a href="http://twitter.com/mattclementsuk" title="Twitter" target="_blank">Twitter</a></li>
-        <li><a href="https://github.com/mattclements" title="GitHub" target="_blank">GitHub</a></li>
-        <li><a href="https://coderwall.com/mattclements" title="CoderWall" target="_blank">CoderWall</a></li>
-        <li><a href="mailto:matt@mattclements.co.uk" title="Email">Email</a></li>
-        <li><a href="skype:clementsweb?chat" title="Skype">Skype</a></li>
-        <li><a href="/feeds/feed.xml" title="RSS">RSS</a></li>
-    </ul>
-    <p>&copy;&nbsp;{{ site.time | date: '%Y' }} Matt Clements. Built using <a href="http://jekyllrb.com/">Jekyll</a> and <a href="http://sass-lang.com/">Sass</a>. Source Code on <a href="https://github.com/mattclements/mattclements.github.com">GitHub</a>.</p>
+	<ul class="footer-nav">
+		<li><a href="http://twitter.com/{{ site.twitter_username }}" title="Twitter" target="_blank">Twitter</a></li>
+		<li><a href="https://github.com/{{ site.github_username }}" title="GitHub" target="_blank">GitHub</a></li>
+		<li><a href="mailto:{{ site.email }}" title="Email">Email</a></li>
+		<li><a href="skype:{{ site.skype_username }}?chat" title="Skype">Skype</a></li>
+		<li><a href="{{ "/feed.xml" | relative_url }}" title="RSS">RSS</a></li>
+	</ul>
+	<p>&copy; {{ site.time | date: '%Y' }} <a href="/">{{ site.title }}</a></p>
 </footer>

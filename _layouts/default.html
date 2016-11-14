@@ -1,8 +1,24 @@
-{% include head.html %}
-{% include header.html %}
-<article class="main" role="main"> 
-{{ content }} 
-</article>
-{% include sidebar.html %}
-{% include footer.html %}
-{% include foot.html %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="{{ page.lang | default: site.lang | default: "en" }}"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="{{ page.lang | default: site.lang | default: "en" }}"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="{{ page.lang | default: site.lang | default: "en" }}"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ page.lang | default: site.lang | default: "en" }}"> <!--<![endif]-->
+<head>
+  {% include head.html %}
+</head>
+<body>
+  
+  <div class="wrapper">
+
+    {% include header.html %}
+  
+    {{ content }}
+
+    <aside class="sidebar" role="complementary">
+      {% include sidebar.html %}
+    </aside>
+
+    {% include footer.html %}
+  </div>
+</body>
+</html>

@@ -1,10 +1,13 @@
 <header class="header" role="banner">
-	<div class="avatar"><img src="/images/avatar.jpg" alt="Photo Matt Clements" /></div>
-	<h1 class="site-title"><a href="/" title="Home">Matt Clements</a></h1>
+	<div class="avatar"><img src="/assets/img/avatar_square_small.png" alt="Photo Matt Clements" /></div>
+	<h1 class="site-title"><a href="/" title="Home">{{ site.title }}</a></h1>
 	<nav role="navigation">
 		<ul class="site-nav">
-			<li><a class="site-nav__home" href="/" title="Home">Home</a></li>
-			<li><a class="site-nav__resume" href="/resume/" title="Resume">Resume</a></li>
+			{% for my_page in site.pages %}
+				{% if my_page.title %}
+					<li><a href="{{ my_page.url | relative_url }}" title="{{ my_page.title | escape }}">{{ my_page.title | escape }}</a></li>
+				{% endif %}
+			{% endfor %}
 		</ul>
 	</nav>
 </header>

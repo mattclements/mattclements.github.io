@@ -1,24 +1,15 @@
 ---
-published: true
-"page-class": "page--post"
+layout: default
 ---
+<main class="main" role="main">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+    <p class="date"><time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%d/%m/%Y" }}</time> </p>
 
-{% include head.html %}
-{% include header.html %}
-{% if page.numberedFigures %}
-<article class="main numbered-figures" role="main">
-{% else %}
-<article class="main" role="main">
-{% endif %}
-{% if page.title %} 
-<h1>{{ page.title }}</h1> 
-{% endif %}
-<p class="date">{{ page.date | date: "%B %d, %Y" }}</p> 
-{{ content }}
-{% if page.comments %}
-<div id="disqus_thread"></div> 
-{% endif %}
-</article>
-{% include sidebar.html %}
-{% include footer.html %}
-{% include foot.html %}
+    <section class="post-content">
+      {{ content }}
+
+      {% if site.disqus.shortname %}
+        {% include disqus_comments.html %}
+      {% endif %}
+    </section>
+</main>

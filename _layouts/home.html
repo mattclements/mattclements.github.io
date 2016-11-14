@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<main class="main" role="main">
+  {{ content }}
+
+  <ul class="list-articles">
+    {% for post in site.posts %}
+    <li role="article" class="post">
+
+      <p class="list-articles__date"><time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%b %-d, %Y" }}</time></p>
+      <h2 class="list-articles__title"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
+
+    </li>
+    {% endfor %}
+  </ul>
+</main>
