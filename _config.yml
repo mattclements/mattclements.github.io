@@ -10,6 +10,5 @@ exclude: ['README.md', 'sass/']
 
 paginate: 7
 
-markdown: rdiscount
 permalink: pretty
 pygments: true
