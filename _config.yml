@@ -11,4 +11,3 @@ exclude: ['README.md', 'sass/']
 paginate: 7
 
 permalink: pretty
-pygments: true
