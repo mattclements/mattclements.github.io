@@ -1,9 +1,9 @@
 ---
 require:
 - jekyll-compass
-project_path: "/Users/matt/Projects/mattclements/."
+project_path: "/Users/matt/Projects/mattclements.github.com/."
 http_path: "/"
 css_dir: css
-sass_dir: _compass
+sass_dir: sass
 images_dir: images
 javascripts_dir: javascripts

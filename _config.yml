@@ -12,8 +12,6 @@ google_analytics: UA-10215335-3
 #server: true
 exclude: ['README.md', 'sass/']
 
-paginate: 7
-
 permalink: pretty
 
 gems:
