@@ -15,7 +15,9 @@
 
 @import "vendor/font-awesome"; /* 3 */
 @import "vendor/google-fonts";
-@import "vendor/prism";
+//@import "vendor/prism";
+//@import "vendor/highlight";
+@import "vendor/pygments";
 
 @import "partials/globals";    /* 4 */
 @import "partials/containers";

@@ -41,7 +41,7 @@ function send_pushover_notification() {
 }
 
 var dash_button = require('node-dash-button'),
-    dash = dash_button('xx:xx:xx:xx:xx:xx'), //REPLACE WITH YOUR ADDRESS
+    dash = dash_button('xx:xx:xx:xx:xx:xx'),
     exec = require('child_process').exec;
 
 dash.on('detected', function() {
