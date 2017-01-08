@@ -10,7 +10,7 @@ So, my weekend hack project came to me in the form of a tweet. Thanks to [Christ
 
 Myself and my eldest set about installing Node, developing the required code [mainly based upon the original article](https://github.com/initialstate/silent-doorbell/wiki), and working with [Pushover](https://pushover.net) which I have already used previously for notifications, the final code looks as follows:
 
-```javascript
+{% highlight js %}
 function send_pushover_notification() {
 
   var push = require( 'pushover-notifications' );
@@ -52,7 +52,7 @@ dash.on('detected', function() {
 
 
 console.log('Ready');
-```
+{% endhighlight %}
 
 We have a server fitted in the loft which I installed Node onto, then [installed PM2](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-14-04#install-pm2) in order to run the application as a service.
 
