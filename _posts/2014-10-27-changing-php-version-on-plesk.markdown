@@ -41,7 +41,8 @@ cd /var/www/vhosts/example.com/conf
 {% endhighlight %}
 
 Create a vhost.conf file with the following content:
-{% endhighlight %}
+
+{% highlight apache %}
 <Directory /var/www/vhosts/example.com/httpdocs>
 RemoveHandler fcgid-script
 <IfModule mod_fcgid.c>

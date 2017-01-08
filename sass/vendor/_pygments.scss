@@ -10,7 +10,7 @@
  * 4. Disable word hyphenation within code blocks
  * 5. Reduce font size on small screens
  */
-.highlight {
+.highlight, .highlighter-rouge {
 	margin-bottom: $space;
 	padding: .6em;
 	overflow-x: auto;       /* 1 */
