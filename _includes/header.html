@@ -4,7 +4,7 @@
 	<nav role="navigation">
 		<ul class="site-nav">
 			{% for my_page in site.pages %}
-				{% if my_page.title %}
+				{% if my_page.title  %}
 					<li><a href="{{ my_page.url | relative_url }}" title="{{ my_page.title | escape }}">{{ my_page.title | escape }}</a></li>
 				{% endif %}
 			{% endfor %}
