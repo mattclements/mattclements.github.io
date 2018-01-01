@@ -108,6 +108,10 @@ ul, ol {
 
 .post-content ul {
 	list-style: square outside none;
+
+	li {
+		padding-bottom: 5px;
+	}
 }
 
 /**
