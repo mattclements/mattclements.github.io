@@ -15,19 +15,7 @@ process for new clients including developing heavily with the Laravel framework.
 
 #### Freelance - (2004 - Current) - Web Developer
 
-I have been working on many sites during the past nine years as either 
-Laravel/PHP/MySQL &amp; HTML developer, or Server administration. Some of these 
-include:
-
-* Yellowstone (Linux Server Administration)
-* Selective Lets (Web Design &amp; System Integration)
-* Clarity of Sight (ZenCart Web Development)
-* GO International (SEO Work &amp; Website Redesign)
-
-#### Personal Projects
-
-* [Prepros](http://alphapixels.com/prepros/) Open Source Precompiler (Port to OSX)
-* [advEmail](https://github.com/mattclements/advEmail) PHP Email Library
+I have been working on many sites & systems as either Laravel/PHP/MySQL &amp; HTML developer, or Server administration. My specilism is in building complex PHP based systems to automate business processes
 
 ---
 
@@ -35,15 +23,11 @@ include:
 
 #### Programming languages
 
-PHP, Laravel, MySQL, HTML, CSS (SASS), JavaScript & jQuery, Oracle SQL/PLSQL, Objective-C (iOS/OSX), Python
+PHP, Laravel, MySQL, HTML, CSS (Sass), JavaScript/jQuery, Oracle SQL/PLSQL, Objective-C (iOS/OSX), Python
 
 #### Software Tools
 
-PHPStorm, Sublime Text 3, Git, Photoshop
-
-#### Methodologies
-
-PRINCE2, Agile/XP
+PHPStorm, Sublime Text 3, Git, Vagrant
 
 ---
 
