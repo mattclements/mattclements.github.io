@@ -69,6 +69,10 @@ h4, .h4 {
 	@include font-size(2.4);
 }
 
+strong, b {
+	font-weight: bold;
+}
+
 /**
  * Table of contents
  */
