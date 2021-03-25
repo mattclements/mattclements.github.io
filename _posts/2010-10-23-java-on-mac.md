@@ -1,15 +1,7 @@
 ---
 layout: post
-status: publish
-published: true
 title: Java on Mac
-author: Matt Clements
-author_login: admin
-author_email: matt@mattclements.co.uk
-author_url: http://www.mattclements.co.uk/
-wordpress_id: 25
-wordpress_url: http://www.mattclements.co.uk/?p=25
-date: 2010-10-23 16:04:03.000000000 +01:00
+date: 2010-10-23 16:04:03
 ---
 I have been spending some time the start of this term at <a href="http://www.beds.ac.uk/" target="_blank">University</a> touching up on some Java. This year is my final year (3rd Year) and the only time we have previously covered Java was in the first year for about 12 weeks, in a somewhat basic fashion (Command Line eventually onto some GUI using JOptionPane) - At this time I had very little understanding of OO (Object Orientated) programming, just that we all knew we had to use it.
 
