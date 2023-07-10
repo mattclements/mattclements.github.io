@@ -41,7 +41,7 @@ and internal applications to manage our business.
 During this time I was often the individual to work with end customers to understand their needs &amp; wants, and turn these
 into actuality.
 
-#### Freelance - (2004 - 2017) - Web Developer & Server Admin
+### Freelance - (2004 - 2017) - Web Developer & Server Admin
 
 During my early career, I worked as a Freelance developer (mainly PHP &amp; MySQL) in order to further build my knowledge.
 
