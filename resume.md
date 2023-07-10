@@ -12,9 +12,9 @@ Background from the engineering space, developing in PHP/SQL utilising Laravel, 
 
 ## Experience
 
-#### Xplor Technologies / Debit Finance Collections Plc (2010 - Present) - VP of Engineering - UK/EU Payments
+### Xplor Technologies / Debit Finance Collections Plc (2010 - Present) - VP of Engineering - UK/EU Payments
 
-##### VP of Engineering - UK/EU Payments (2019 - Present)
+#### VP of Engineering - UK/EU Payments (2019 - Present)
 
 In 2019, I took on a new role to focus back on my area of passion, the engineering/development space. I now look after teams across
 UK, US &amp; New Zealand to manage a combination of legacy applications &amp; platforms, along with our new global payment platform.
@@ -22,7 +22,7 @@ UK, US &amp; New Zealand to manage a combination of legacy applications &amp; pl
 During my time at Xplor, I have been the go-to person for UK payments questions or issues, mainly around the BACS (Direct Debit) payment
 rails, and have developed a strong intricate knowledge of these platforms.
 
-##### IT/Development Manager (2016 - 2019)
+#### IT/Development Manager (2016 - 2019)
 
 In 2016, I was promoted to the IT/Development manager, looking after the IT &amp; Development teams at Debit Finance.
 This involved both managing the on-premise infrastructure, end-user support &amp; the engineering teams including front-end,
@@ -31,7 +31,7 @@ back-end and database engineering staff.
 During my role as the IT/Development Manager, I rolled out increased monitoring &amp; alerting to ensure that we could proactively
 troubleshoot issues &amp; investigate, prior to customers raising issues with us.
 
-##### PHP Developer (2010 - 2016)
+#### PHP Developer (2010 - 2016)
 
 During my initial role at Debit Finance (now Xplor Technologies), I started as a PHP Developer,
 developing &amp; managing our various in-house developed applications such as FastDD (a customer sign-up portal),
@@ -48,6 +48,7 @@ During my early career, I worked as a Freelance developer (mainly PHP &amp; MySQ
 ---
 
 ## Skills
+
 #### Programming languages
 PHP, SQL (MySQL, Oracle, SQL Server), Python, Powershell, Bash, HTML, CSS, JavaScript, Oracle PL/SQL
 
