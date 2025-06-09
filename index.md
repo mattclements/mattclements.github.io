@@ -6,15 +6,19 @@ permalink: /
 
 ## Bio
 
-Currently the VP of Engineering for UK/EU Payments at Xplor Technologies.
+Currently the Director of ClearDebit, part of the ClearCourse Group.
 
 Background from the engineering space, developing in PHP/SQL utilising Laravel, with additional knowledge of Linux Server Admin. I now lead the engineering teams in the payments space with detailed knowledge of the payment industry.
 
 ## Experience
 
-### Xplor Technologies / Debit Finance Collections Plc (2010 - Present) - VP of Engineering - UK/EU Payments
+### ClearDebit (2023 - Present) - Director
 
-#### VP of Engineering - UK/EU Payments (2019 - Present)
+Director of ClearDebit, part of the ClearCourse group. Leading the Direct Debit payments business through support of Product, Strategy & Commercial/Go-to-Market.
+
+### Xplor Technologies / Debit Finance Collections Plc (2010 - 2023) - VP of Engineering - UK/EU Payments
+
+#### VP of Engineering - UK/EU Payments (2019 - 2023)
 
 In 2019, I took on a new role to focus back on my area of passion, the engineering/development space. I now look after teams across
 UK, US &amp; New Zealand to manage a combination of legacy applications &amp; platforms, along with our new global payment platform.
