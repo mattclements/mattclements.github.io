@@ -54,7 +54,7 @@ During my early career, I worked as a Freelance developer (mainly PHP &amp; MySQ
 ## Skills
 
 #### Programming languages
-PHP, SQL (MySQL, Oracle, SQL Server), Python, Powershell, Bash, HTML, CSS, JavaScript, Oracle PL/SQL
+PHP, SQL (MySQL, Oracle, SQL Server), Powershell, Bash, HTML, CSS, JavaScript, Oracle PL/SQL
 
 #### Tools
 Jira, Confluence, Azure DevOps, Microsoft Office Suite
