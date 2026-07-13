@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Amsterdam Marathon Build — Sub-2:36</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --bg:#14181C;
+  --panel:#1B2025;
+  --panel-2:#20262C;
+  --line:#2A3038;
+  --chalk:#EDEFF1;
+  --steel:#8B95A1;
+  --steel-dim:#5B646E;
+  --accent:#F2571C;
+  --accent-dim:#7A2E11;
+  --taper:#4F9D69;
+  --race:#F2C41C;
+  --blue:#6FA0E8;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--chalk);font-family:'Inter',sans-serif;}
+::selection{background:var(--accent);color:var(--bg);}
+
+.wrap{max-width:920px;margin:0 auto;padding:28px 20px 80px;}
+
+.hero{
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,var(--panel-2),var(--panel));
+  border-radius:4px;
+  padding:26px 26px 22px;
+  margin-bottom:22px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute; left:0; right:0; top:0; height:3px;
+  background:repeating-linear-gradient(90deg,var(--accent) 0 18px, transparent 18px 30px);
+  opacity:.9;
+}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;
+  letter-spacing:.14em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.hero h1{
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:clamp(28px,5vw,42px);
+  letter-spacing:.01em;
+  margin:0 0 4px;
+  text-transform:uppercase;
+}
+.hero .sub{color:var(--steel);font-size:14.5px;margin-bottom:20px;}
+
+.clockrow{display:flex; gap:0; border-top:1px solid var(--line); padding-top:16px; flex-wrap:wrap;}
+.clockcell{flex:1; min-width:110px; padding:0 18px; border-right:1px solid var(--line);}
+.clockcell:first-child{padding-left:0;}
+.clockcell:last-child{border-right:none;}
+.clockcell .num{font-family:'IBM Plex Mono',monospace; font-size:26px; font-weight:600; color:var(--chalk); line-height:1;}
+.clockcell .lbl{font-size:10.5px; color:var(--steel-dim); text-transform:uppercase; letter-spacing:.1em; margin-top:6px;}
+.clockcell.hot .num{color:var(--accent);}
+
+.lane{margin:22px 0 26px; position:relative;}
+.lane-track{
+  display:flex; height:34px; border-radius:2px; overflow:hidden; border:1px solid var(--line);
+}
+.lane-seg{flex:1; position:relative; border-right:1px solid var(--bg);}
+.lane-seg:last-child{border-right:none;}
+.lane-seg.phase-base{background:#2A3140;}
+.lane-seg.phase-thresh{background:#1E3B3C;}
+.lane-seg.phase-peak{background:var(--accent-dim);}
+.lane-seg.phase-sharpen{background:#3A3316;}
+.lane-seg.phase-taper{background:#1F3A2A;}
+.lane-seg.phase-race{background:#4A3B0E;}
+.lane-seg.current::after{
+  content:"";
+  position:absolute; top:-4px; bottom:-4px; left:0; right:0;
+  border:2px solid var(--chalk); border-radius:2px;
+}
+.lane-seg.hm::before{
+  content:"HM"; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:600; color:var(--race); letter-spacing:.05em;
+}
+.lane-legend{display:flex; gap:16px; flex-wrap:wrap; margin-top:10px; font-size:11px; color:var(--steel);}
+.lane-legend span{display:inline-flex; align-items:center; gap:6px;}
+.dot{width:9px;height:9px;border-radius:2px;display:inline-block;}
+
+.paces{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:4px; overflow:hidden; margin-bottom:20px;
+}
+.pace{background:var(--panel); padding:14px 12px;}
+.pace .k{font-size:10px; letter-spacing:.08em; color:var(--steel-dim); text-transform:uppercase;}
+.pace .v{font-family:'IBM Plex Mono',monospace; font-size:15px; margin-top:5px; color:var(--chalk);}
+
+.callout{
+  border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--panel);
+  border-radius:0 4px 4px 0; padding:14px 16px; margin-bottom:28px; font-size:12.5px; color:var(--steel); line-height:1.6;
+}
+.callout b{color:var(--chalk);}
+
+.weeks{display:flex; flex-direction:column; gap:10px;}
+.week{
+  border:1px solid var(--line); border-radius:4px; background:var(--panel);
+  overflow:hidden;
+}
+.week.current{border-color:var(--accent);}
+.week.hmweek{border-color:var(--race);}
+.week-head{
+  display:flex; align-items:center; gap:14px; padding:14px 16px; cursor:pointer;
+  user-select:none;
+}
+.week-head:hover{background:var(--panel-2);}
+.wk-num{
+  font-family:'Oswald',sans-serif; font-size:20px; font-weight:600; color:var(--steel);
+  width:34px; flex-shrink:0;
+}
+.week.current .wk-num{color:var(--accent);}
+.week.hmweek .wk-num{color:var(--race);}
+.wk-meta{flex:1; min-width:0;}
+.wk-phase{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--steel-dim); margin-bottom:2px;
+}
+.wk-dates{font-size:13.5px; color:var(--chalk); font-weight:500;}
+.wk-right{display:flex; align-items:center; gap:16px; flex-shrink:0;}
+.wk-miles{text-align:right;}
+.wk-miles .n{font-family:'IBM Plex Mono',monospace; font-size:18px; color:var(--chalk);}
+.wk-miles .u{font-size:10px; color:var(--steel-dim); text-transform:uppercase;}
+.chev{color:var(--steel-dim); font-size:12px; transition:transform .18s ease; width:14px; text-align:center;}
+.week.open .chev{transform:rotate(90deg); color:var(--accent);}
+
+.wk-body{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+.week.open .wk-body{max-height:2400px;}
+.days{border-top:1px solid var(--line);}
+.day{border-bottom:1px solid var(--line);}
+.day:last-child{border-bottom:none;}
+.day-row{display:flex; gap:12px; align-items:flex-start; padding:11px 16px 11px 16px; cursor:pointer;}
+.day-row:hover{background:var(--panel-2);}
+.day-row.restday{background:rgba(79,157,105,.06);}
+.day-col1{width:96px; flex-shrink:0; padding-top:1px;}
+.day-name{font-size:13px; font-weight:600; color:var(--chalk);}
+.day-date{font-size:10.5px; color:var(--steel-dim); font-family:'IBM Plex Mono',monospace; margin-top:1px;}
+.day-col2{flex:1; min-width:0;}
+.day-title{font-size:13.5px; color:var(--chalk); font-weight:500;}
+.tag{
+  display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.06em;
+  text-transform:uppercase; padding:2px 6px; border-radius:2px; margin-right:8px; vertical-align:middle;
+  border:1px solid var(--line); color:var(--steel);
+}
+.tag.dt{border-color:var(--accent); color:var(--accent);}
+.tag.mp{border-color:#3D7DD9; color:var(--blue);}
+.tag.long{border-color:var(--race); color:var(--race);}
+.tag.race{background:var(--race); border-color:var(--race); color:var(--bg); font-weight:600;}
+.tag.rest{border-color:var(--taper); color:var(--taper);}
+.tag.own{border-color:var(--steel); color:var(--chalk);}
+.day-col3{width:64px; text-align:right; flex-shrink:0;}
+.day-miles{font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--chalk);}
+.day-miles .u{font-size:9px;color:var(--steel-dim);}
+.day-detail{
+  max-height:0; overflow:hidden; transition:max-height .2s ease;
+  padding:0 16px 0 108px; font-size:12.5px; color:var(--steel); line-height:1.55;
+}
+.day.expanded .day-detail{max-height:320px; padding-bottom:14px;}
+.day-detail b{color:var(--chalk); font-weight:600;}
+.day-detail .pacehint{
+  display:inline-block; margin-top:6px; font-family:'IBM Plex Mono',monospace; font-size:11px;
+  color:var(--accent); background:rgba(242,87,28,.08); padding:2px 7px; border-radius:2px;
+}
+.day-detail .optional{
+  display:block; margin-top:6px; font-size:11.5px; color:var(--steel-dim); font-style:italic;
+}
+
+.foot{margin-top:26px; padding-top:16px; border-top:1px solid var(--line); font-size:12px; color:var(--steel-dim); line-height:1.6;}
+.foot b{color:var(--steel);}
+
+@media(max-width:560px){
+  .paces{grid-template-columns:repeat(2,1fr);}
+  .clockcell{min-width:45%;}
+  .day-col1{width:74px;}
+  .day-detail{padding-left:86px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Marathon Build &middot; 15 Weeks</div>
+    <h1>TCS Amsterdam Marathon</h1>
+    <div class="sub">Sunday 18 October 2026 &middot; Target sub-2:36:00 (5:57/mi &middot; 3:42/km)</div>
+    <div class="clockrow" id="clockrow"></div>
+  </div>
+
+  <div class="lane">
+    <div class="lane-track" id="laneTrack"></div>
+    <div class="lane-legend">
+      <span><i class="dot" style="background:#2A3140"></i>Base</span>
+      <span><i class="dot" style="background:#1E3B3C"></i>Threshold intro</span>
+      <span><i class="dot" style="background:var(--accent-dim)"></i>Peak</span>
+      <span><i class="dot" style="background:#3A3316"></i>Sharpen</span>
+      <span><i class="dot" style="background:#1F3A2A"></i>Taper</span>
+      <span><i class="dot" style="background:#4A3B0E"></i>Race week</span>
+    </div>
+  </div>
+
+  <div class="paces">
+    <div class="pace"><div class="k">Easy</div><div class="v">7:30-8:15/mi</div></div>
+    <div class="pace"><div class="k">Steady</div><div class="v">6:45-7:00/mi</div></div>
+    <div class="pace"><div class="k">Threshold</div><div class="v">5:40-5:45/mi</div></div>
+    <div class="pace"><div class="k">Marathon</div><div class="v">5:55-6:00/mi</div></div>
+    <div class="pace"><div class="k">Track rep</div><div class="v">5:10-5:20/mi</div></div>
+  </div>
+
+  <div class="callout">
+    <b>Friday is a full rest day</b> across all 15 weeks, no running, no S&C. It sits after Thursday's hard session and before the weekend's key work.<br>
+    <b>All track WU/CD standardized to 2mi each side</b> (AM and PM), from Week 5 onward. Other easy days trim slightly to compensate.<br>
+    <b>Weeks 1-4:</b> AM easy jog added before your usual Tuesday evening track session, to build running frequency. Other days trim to compensate.<br>
+    <b>Week 9:</b> Half marathon (6 Sept), B-goal, raced hard. No hard taper into it, Tuesday double-threshold and Thursday MP tempo stay as normal. Saturday stays light. Sunday is WU/CD + race, with an optional easy evening double for volume.
+  </div>
+
+  <div class="weeks" id="weeks"></div>
+
+  <div class="foot">
+    <b>Double-threshold Tuesday</b> (from Week 5): AM session is longer/slower reps at threshold pace, PM track session is shorter/faster reps at the same effort. Neither is maximal, the point is volume at threshold without a max-effort recovery cost.<br><br>
+    <b>Load management:</b> weekly increases capped around 10%, cutback weeks at 3, 7 and 10. Given the plantar fasciitis history, if it flares, drop the AM threshold rep first and protect the long run before cutting anything else.<br><br>
+    Tap any week to expand it, tap a day for full session detail.
+  </div>
+
+</div>
+
+<script>
+const RACE_DATE = new Date('2026-10-18T00:00:00');
+const TODAY = new Date('2026-07-07T00:00:00');
+
+const PHASES = {
+  base:{label:'Aerobic Rebuild', cls:'phase-base'},
+  thresh:{label:'Threshold Intro', cls:'phase-thresh'},
+  peak:{label:'Peak Marathon-Specific', cls:'phase-peak'},
+  sharpen:{label:'Sharpen', cls:'phase-sharpen'},
+  taper:{label:'Taper', cls:'phase-taper'},
+  race:{label:'Race Week', cls:'phase-race'}
+};
+
+function d(name,date,title,miles,tag,detail,pace,optional){
+  return {name,date,title,miles,tag,detail,pace,optional};
+}
+
+const REST = d('Fri','__DATE__','Rest day',0,'rest','Full rest, no running, no S&C. Recovery before the weekend\u2019s key sessions.','-');
+
+function restDay(date){
+  return d('Fri',date,'Rest day',0,'rest','Full rest, no running, no S&C. Recovery before the weekend\u2019s key sessions.','-');
+}
+
+const weeks = [
+{n:1, phase:'base', start:'Jul 6', end:'Jul 12', miles:65, days:[
+  d('Mon','Jul 6','Easy run',10,'easy','Easy aerobic running, conversational effort throughout. Slightly longer, absorbing Friday\u2019s rest-day volume.','7:30-8:15/mi'),
+  d('Tue','Jul 7','AM jog + Tuesday track',13,'own','AM: 4mi easy jog, building running frequency.<br>PM: your usual session, WU/CD plus approx 5mi effort volume on the track.','AM easy, PM ~5mi effort'),
+  d('Wed','Jul 8','Easy + S&C',7,'easy','Easy run, S&C session in the evening.','7:30-8:15/mi'),
+  d('Thu','Jul 9','Progression run',9,'','Easy start, last 3mi progressing down to steady effort.','Finish 6:45-7:00/mi'),
+  restDay('Jul 10'),
+  d('Sat','Jul 11','Easy run',8,'easy','Short and easy, legs fresh for Sunday.','7:45-8:15/mi'),
+  d('Sun','Jul 12','Long run',18,'long','Steady aerobic long run, no pace work yet. Rebuilding time on feet.','7:15-7:45/mi'),
+]},
+{n:2, phase:'base', start:'Jul 13', end:'Jul 19', miles:64, days:[
+  d('Mon','Jul 13','Easy run',9,'easy','Eased back slightly, last week came in under target after the 5k and the Monday rest, no need to force the number.','7:30-8:15/mi'),
+  d('Tue','Jul 14','AM jog + Tuesday track',13,'own','AM: 4mi easy jog, building running frequency.<br>PM: your usual session, WU/CD plus approx 5mi effort volume.','AM easy, PM ~5mi effort'),
+  d('Wed','Jul 15','Easy + S&C',6,'easy','Recovery day, S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Jul 16','Progression run',8,'','Easy start, last 3-4mi down to steady effort.','Finish 6:40-6:55/mi'),
+  restDay('Jul 17'),
+  d('Sat','Jul 18','Easy run',8,'easy','Short and easy.','7:45-8:15/mi'),
+  d('Sun','Jul 19','Long run',20,'long','Steady long run, building time on feet.','7:15-7:45/mi'),
+]},
+{n:3, phase:'base', start:'Jul 20', end:'Jul 26', miles:58, days:[
+  d('Mon','Jul 20','Easy run',9,'easy','Cutback week: everything trims back.','7:30-8:15/mi'),
+  d('Tue','Jul 21','AM jog + Tuesday track',13,'own','AM: 4mi easy jog.<br>PM: your usual track session, unchanged.','AM easy, PM ~5mi effort'),
+  d('Wed','Jul 22','Easy + S&C',5,'easy','Recovery, S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Jul 23','Progression run',8,'','Easy building to steady over the last 3mi.','Finish 6:45-7:00/mi'),
+  restDay('Jul 24'),
+  d('Sat','Jul 25','Easy run',7,'easy','Short and easy.','7:45-8:15/mi'),
+  d('Sun','Jul 26','Long run',16,'long','Shorter long run, absorb the block so far.','7:15-7:45/mi'),
+]},
+{n:4, phase:'base', start:'Jul 27', end:'Aug 2', miles:70, days:[
+  d('Mon','Jul 27','Easy run',10,'easy','Easy aerobic.','7:30-8:15/mi'),
+  d('Tue','Jul 28','AM jog + Tuesday track',13,'own','AM: 4mi easy jog.<br>PM: last week of your current track session before double-threshold starts.','AM easy, PM ~5mi effort'),
+  d('Wed','Jul 29','Easy + S&C',7,'easy','Recovery, S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Jul 30','Progression run',9,'','Easy building to steady over the last 3-4mi.','Finish 6:40-6:55/mi'),
+  restDay('Jul 31'),
+  d('Sat','Aug 1','Easy run',9,'easy','Short and easy.','7:45-8:15/mi'),
+  d('Sun','Aug 2','Long run',22,'long','Steady long run with the last 3mi at moderate effort. Smoothed down slightly, the jump out of the cutback week was steeper than the 10% guideline.','Steady, last 3mi 6:50/mi'),
+]},
+{n:5, phase:'thresh', start:'Aug 3', end:'Aug 9', miles:72, days:[
+  d('Mon','Aug 3','Easy run',10,'easy','Easy aerobic, longer to absorb Friday\u2019s rest-day volume.','7:30-8:15/mi'),
+  d('Tue','Aug 4','Double threshold',12,'dt','AM: 2mi WU, 4x1000m @ threshold (90s jog), 2mi CD (6.5mi).<br>PM Track: 2mi WU, 6x400m @ threshold effort (60s jog), 2mi CD (5.5mi).','T-pace 5:40-5:45/mi'),
+  d('Wed','Aug 5','Easy + S&C',10,'easy','Recovery day after the double, S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Aug 6','MP tempo',9,'mp','2mi WU, 5mi @ marathon pace, 2mi CD.','MP 5:55-6:00/mi'),
+  restDay('Aug 7'),
+  d('Sat','Aug 8','Easy run',8,'easy','Short and easy.','7:45-8:15/mi'),
+  d('Sun','Aug 9','Long run',23,'long','Steady long run, last 3mi at moderate effort.','Steady, last 3mi 6:50/mi'),
+]},
+{n:6, phase:'thresh', start:'Aug 10', end:'Aug 16', miles:75, days:[
+  d('Mon','Aug 10','Easy run',11,'easy','Easy aerobic, longer to absorb Friday\u2019s rest-day volume.','7:30-8:15/mi'),
+  d('Tue','Aug 11','Double threshold',13.1,'dt','AM: 2mi WU, 5x1000m @ threshold (75s jog), 2mi CD (7.1mi).<br>PM Track: 2mi WU, 8x400m @ threshold (60s jog), 2mi CD (6mi).','T-pace 5:40-5:45/mi'),
+  d('Wed','Aug 12','Easy + S&C',10.9,'easy','Recovery, S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Aug 13','MP tempo',10,'mp','2mi WU, 6mi @ marathon pace, 2mi CD.','MP 5:55-6:00/mi'),
+  restDay('Aug 14'),
+  d('Sat','Aug 15','Easy run',8,'easy','Short and easy.','7:45-8:15/mi'),
+  d('Sun','Aug 16','Long run',22,'long','Steady with last 4mi at marathon pace.','Last 4mi @ MP'),
+]},
+{n:7, phase:'thresh', start:'Aug 17', end:'Aug 23', miles:62, days:[
+  d('Mon','Aug 17','Easy run',9,'easy','Cutback week.','7:30-8:15/mi'),
+  d('Tue','Aug 18','Double threshold',12,'dt','AM: 2mi WU, 4x1000m @ threshold (90s jog), 2mi CD (6.5mi).<br>PM Track: 2mi WU, 6x400m @ threshold (60s jog), 2mi CD (5.5mi).','T-pace 5:40-5:45/mi'),
+  d('Wed','Aug 19','Easy + S&C',7,'easy','Recovery, S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Aug 20','MP tempo',8,'mp','2mi WU, 5mi @ marathon pace, 1mi CD.','MP 5:55-6:00/mi'),
+  restDay('Aug 21'),
+  d('Sat','Aug 22','Easy run',7,'easy','Short and easy.','7:45-8:15/mi'),
+  d('Sun','Aug 23','Long run',19,'long','Steady with last 3mi at marathon pace. Absorb before the peak block.','Last 3mi @ MP'),
+]},
+{n:8, phase:'peak', start:'Aug 24', end:'Aug 30', miles:78, days:[
+  d('Mon','Aug 24','Easy run',11,'easy','Easy aerobic, longer to absorb Friday\u2019s rest-day volume.','7:30-8:15/mi'),
+  d('Tue','Aug 25','Double threshold',14.2,'dt','AM: 2mi WU, 5x1200m @ threshold (75s jog), 2mi CD (7.7mi).<br>PM Track: 2mi WU, 10x400m @ threshold (60s jog), 2mi CD (6.5mi).','T-pace 5:40-5:45/mi'),
+  d('Wed','Aug 26','Easy + S&C',9.8,'easy','Recovery, S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Aug 27','MP tempo',11,'mp','2.5mi WU, 8mi @ marathon pace, 2.5mi CD.','MP 5:55-6:00/mi'),
+  restDay('Aug 28'),
+  d('Sat','Aug 29','Easy run',8,'easy','Short and easy.','7:45-8:15/mi'),
+  d('Sun','Aug 30','Long run',24,'long','Long run, last 10mi at marathon pace. Final full peak long run before the half marathon.','Last 10mi @ MP'),
+]},
+{n:9, phase:'peak', start:'Aug 31', end:'Sep 6', miles:72.1, days:[
+  d('Mon','Aug 31','Easy run',12,'easy','Easy aerobic, longer to absorb Friday\u2019s rest-day volume. Normal week, no taper.','7:30-8:15/mi'),
+  d('Tue','Sep 1','Double threshold',14.4,'dt','AM: 2mi WU, 5x1200m @ threshold (75s jog), 2mi CD (7.7mi).<br>PM Track: 2mi WU, 11x400m @ threshold (60s jog), 2mi CD (6.7mi). Kept as normal, no taper for a B-race.','T-pace 5:40-5:45/mi'),
+  d('Wed','Sep 2','Easy + S&C',11.6,'easy','Recovery, S&C in the evening. Unchanged.','7:30-8:15/mi'),
+  d('Thu','Sep 3','MP tempo',11,'mp','2.5mi WU, 8mi @ marathon pace, 2.5mi CD. Kept as normal.','MP 5:55-6:00/mi'),
+  restDay('Sep 4'),
+  d('Sat','Sep 5','Easy shakeout',6,'easy','Kept light, not loaded with rest-day volume, sensible freshening before racing hard tomorrow.','Easy, short'),
+  d('Sun','Sep 6','HALF MARATHON (B-goal)',17.1,'race','2mi WU, half marathon raced hard, 2mi CD. This is a B-goal, race it properly but it is a training day first: good data on current threshold-to-marathon fitness.','Race hard','Optional: easy 4-5mi double in the evening if legs allow, purely for weekly volume.'),
+]},
+{n:10, phase:'peak', start:'Sep 7', end:'Sep 13', miles:68, days:[
+  d('Mon','Sep 7','Easy run',9,'easy','Extra easy, absorbing both Sunday\u2019s race effort and Friday\u2019s rest-day volume.','7:45-8:15/mi'),
+  d('Tue','Sep 8','Double threshold',13,'dt','AM: 2mi WU, 4x1200m @ threshold (90s jog), 2mi CD (7mi).<br>PM Track: 2mi WU, 8x400m @ threshold (60s jog), 2mi CD (6mi).','T-pace 5:40-5:45/mi'),
+  d('Wed','Sep 9','Easy + S&C',8,'easy','Recovery, S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Sep 10','MP tempo',9,'mp','2mi WU, 6mi @ marathon pace, 1mi CD.','MP 5:55-6:00/mi'),
+  restDay('Sep 11'),
+  d('Sat','Sep 12','Easy run',8,'easy','Short and easy.','7:45-8:15/mi'),
+  d('Sun','Sep 13','Long run',21,'long','Last 8mi at marathon pace. Cutback week, fresher legs before the marquee session.','Last 8mi @ MP'),
+]},
+{n:11, phase:'peak', start:'Sep 14', end:'Sep 20', miles:82, days:[
+  d('Mon','Sep 14','Easy run',12,'easy','Easy aerobic, longer to absorb Friday\u2019s rest-day volume.','7:30-8:15/mi'),
+  d('Tue','Sep 15','Double threshold',15.5,'dt','AM: 2mi WU, 6x1200m @ threshold (75s jog), 2mi CD (8.5mi).<br>PM Track: 2mi WU, 12x400m @ threshold (60s jog), 2mi CD (7mi).','T-pace 5:40-5:45/mi'),
+  d('Wed','Sep 16','Easy + S&C',11.5,'easy','Recovery, S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Sep 17','MP tempo',11,'mp','2.5mi WU, 8mi @ marathon pace, 2.5mi CD.','MP 5:55-6:00/mi'),
+  restDay('Sep 18'),
+  d('Sat','Sep 19','Easy run',8,'easy','Kept as planned, light before the marquee session, not loaded with rest-day volume.','7:45-8:15/mi'),
+  d('Sun','Sep 20','PEAK long run',24,'long','Marquee session of the block: 6mi easy, then 15mi at marathon pace, 3mi easy CD. Four weeks out, this is the day that tells you the most about sub-2:36 shape.','15mi @ MP 5:55-6:00/mi'),
+]},
+{n:12, phase:'peak', start:'Sep 21', end:'Sep 27', miles:80, days:[
+  d('Mon','Sep 21','Easy run',12,'easy','Easy, extra recovery emphasis after last week\u2019s peak long run, plus Friday\u2019s rest-day volume.','7:30-8:15/mi'),
+  d('Tue','Sep 22','Double threshold',14.2,'dt','AM: 2mi WU, 5x1200m @ threshold (75s jog), 2mi CD (7.7mi).<br>PM Track: 2mi WU, 10x400m @ threshold (60s jog), 2mi CD (6.5mi).','T-pace 5:40-5:45/mi'),
+  d('Wed','Sep 23','Easy + S&C',10.8,'easy','Recovery, S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Sep 24','MP tempo',11,'mp','2.5mi WU, 8mi @ marathon pace, 2.5mi CD.','MP 5:55-6:00/mi'),
+  restDay('Sep 25'),
+  d('Sat','Sep 26','Easy run',7,'easy','Kept light, day before the final big MP long run.','7:45-8:15/mi'),
+  d('Sun','Sep 27','Long run',25,'long','Last 12mi at marathon pace. Three weeks out, final big MP exposure before taper.','Last 12mi @ MP'),
+]},
+{n:13, phase:'sharpen', start:'Sep 28', end:'Oct 4', miles:60, days:[
+  d('Mon','Sep 28','Easy run',9,'easy','Taper begins, volume starts coming down.','7:30-8:15/mi'),
+  d('Tue','Sep 29','Double threshold',12.2,'dt','AM: 2mi WU, 3x1200m @ threshold (90s jog), 2mi CD (6.2mi).<br>PM Track: 2mi WU, 8x400m @ threshold (60s jog), 2mi CD (6mi). Reps down, effort stays sharp.','T-pace 5:40-5:45/mi'),
+  d('Wed','Sep 30','Easy + S&C',5.8,'easy','Recovery, lighter S&C in the evening.','7:30-8:15/mi'),
+  d('Thu','Oct 1','MP tempo',8,'mp','2mi WU, 5mi @ marathon pace, 1mi CD.','MP 5:55-6:00/mi'),
+  restDay('Oct 2'),
+  d('Sat','Oct 3','Easy run',7,'easy','Short and easy.','7:45-8:15/mi'),
+  d('Sun','Oct 4','Long run',18,'long','2 weeks out: shorter long run with 6mi at marathon pace. Last real pace touch before full taper.','6mi @ MP, rest steady'),
+]},
+{n:14, phase:'taper', start:'Oct 5', end:'Oct 11', miles:52, days:[
+  d('Mon','Oct 5','Easy run',8,'easy','Easy, full taper now.','7:30-8:15/mi'),
+  d('Tue','Oct 6','Threshold touch',5.9,'dt','Single AM session only, PM track dropped: 2mi WU, 3x1000m @ threshold (90s jog), 2mi CD. Keeps the legs sharp without adding fatigue.','T-pace 5:40-5:45/mi'),
+  d('Wed','Oct 7','Easy + S&C',10.1,'easy','Easy, light S&C.','7:30-8:15/mi'),
+  d('Thu','Oct 8','MP touch',7,'mp','2mi WU, 3mi @ marathon pace, 2mi CD. Just enough to keep the pace feel sharp.','MP 5:55-6:00/mi'),
+  restDay('Oct 9'),
+  d('Sat','Oct 10','Easy run',6,'easy','Short and easy.','7:45-8:15/mi'),
+  d('Sun','Oct 11','Long run',15,'long','Easy long run, well short of peak volume. Staying loose, not building fitness.','7:15-7:45/mi'),
+]},
+{n:15, phase:'race', start:'Oct 12', end:'Oct 18', miles:50.2, days:[
+  d('Mon','Oct 12','Easy run',5,'easy','Easy, race week begins.','7:45-8:15/mi'),
+  d('Tue','Oct 13','Threshold touch',5,'dt','2mi WU, 4x400m @ marathon-effort-plus with full recovery, 2mi CD. Sharpness, not fatigue.','Brisk, not hard'),
+  d('Wed','Oct 14','Easy run',8,'easy','Easy, absorbing Friday\u2019s rest-day volume.','7:45-8:15/mi'),
+  d('Thu','Oct 15','Easy + strides',4,'','Easy with 4x20s strides. Legs should feel light.','7:45-8:00/mi'),
+  restDay('Oct 16'),
+  d('Sat','Oct 17','Shakeout',2,'rest','15-20min easy with a few strides. Lay out kit, recce the finish area if in Amsterdam.','Very easy + strides'),
+  d('Sun','Oct 18','RACE DAY',26.2,'race','TCS Amsterdam Marathon. Target 5:57/mi average, even to negative split if conditions allow. Start conservative through Vondelpark, controlled effort along the Amstel, push from 35km if it\u2019s there.','Target 5:57/mi &middot; 2:36:00'),
+]},
+];
+
+function daysUntil(){
+  return Math.round((RACE_DATE - TODAY) / 86400000);
+}
+
+function renderClock(){
+  const daysLeft = daysUntil();
+  const totalWeeks = weeks.length;
+  const totalMiles = weeks.reduce((a,w)=>a+w.miles,0);
+  const peakWeek = weeks.reduce((m,w)=>w.miles>m.miles?w:m, weeks[0]);
+  const cells = [
+    {num: daysLeft, lbl:'Days to race', hot:true},
+    {num: totalWeeks, lbl:'Weeks in plan'},
+    {num: peakWeek.miles, lbl:'Peak week (Wk '+peakWeek.n+')'},
+    {num: Math.round(totalMiles/totalWeeks), lbl:'Avg miles/wk'},
+    {num: '2:36', lbl:'Target finish'},
+  ];
+  document.getElementById('clockrow').innerHTML = cells.map(c=>
+    `<div class="clockcell ${c.hot?'hot':''}"><div class="num">${c.num}</div><div class="lbl">${c.lbl}</div></div>`
+  ).join('');
+}
+
+function renderLane(){
+  const currentWeekIdx = weeks.findIndex(w => w.n === currentWeekNum());
+  document.getElementById('laneTrack').innerHTML = weeks.map((w,i)=>
+    `<div class="lane-seg ${PHASES[w.phase].cls} ${i===currentWeekIdx?'current':''} ${w.n===9?'hm':''}" title="Week ${w.n}: ${PHASES[w.phase].label}"></div>`
+  ).join('');
+}
+
+function currentWeekNum(){
+  const wk1start = new Date('2026-07-06T00:00:00');
+  const diffDays = Math.floor((TODAY - wk1start)/86400000);
+  const wk = Math.floor(diffDays/7)+1;
+  return Math.min(Math.max(wk,1),15);
+}
+
+function tagLabel(tag){
+  return {dt:'Double Thresh', mp:'MP', long:'Long Run', race:'Race', rest:'Rest', easy:'Easy', own:'Your Track'}[tag] || '';
+}
+
+function renderWeeks(){
+  const curWk = currentWeekNum();
+  const el = document.getElementById('weeks');
+  el.innerHTML = weeks.map(w=>{
+    const isCurrent = w.n === curWk;
+    const isHM = w.n === 9;
+    const daysHtml = w.days.map((day,di)=>{
+      const isRest = day.tag === 'rest' && day.miles === 0;
+      return `
+      <div class="day" data-wk="${w.n}" data-day="${di}">
+        <div class="day-row ${isRest?'restday':''}">
+          <div class="day-col1">
+            <div class="day-name">${day.name}</div>
+            <div class="day-date">${day.date}</div>
+          </div>
+          <div class="day-col2">
+            ${day.tag ? `<span class="tag ${day.tag}">${tagLabel(day.tag)}</span>` : ''}<span class="day-title">${day.title}</span>
+          </div>
+          <div class="day-col3">
+            <div class="day-miles">${day.miles}<span class="u">mi</span></div>
+          </div>
+        </div>
+        <div class="day-detail">${day.detail} <span class="pacehint">${day.pace}</span>${day.optional ? `<span class="optional">${day.optional}</span>` : ''}</div>
+      </div>`;
+    }).join('');
+
+    return `
+    <div class="week ${isCurrent?'current open':''} ${isHM?'hmweek':''}" data-wk="${w.n}">
+      <div class="week-head">
+        <div class="wk-num">${String(w.n).padStart(2,'0')}</div>
+        <div class="wk-meta">
+          <div class="wk-phase">${PHASES[w.phase].label}${isCurrent?' &middot; Current week':''}${isHM?' &middot; Half Marathon (B-goal)':''}</div>
+          <div class="wk-dates">${w.start} &ndash; ${w.end}</div>
+        </div>
+        <div class="wk-right">
+          <div class="wk-miles"><div class="n">${w.miles}</div><div class="u">miles</div></div>
+          <div class="chev">&#9656;</div>
+        </div>
+      </div>
+      <div class="wk-body"><div class="days">${daysHtml}</div></div>
+    </div>`;
+  }).join('');
+
+  document.querySelectorAll('.week-head').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      head.parentElement.classList.toggle('open');
+    });
+  });
+  document.querySelectorAll('.day').forEach(dayEl=>{
+    dayEl.querySelector('.day-row').addEventListener('click',(e)=>{
+      e.stopPropagation();
+      dayEl.classList.toggle('expanded');
+    });
+  });
+}
+
+renderClock();
+renderLane();
+renderWeeks();
+</script>
+</body>
+</html>
