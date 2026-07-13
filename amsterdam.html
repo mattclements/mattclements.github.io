@@ -239,7 +239,8 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--chalk);font-family
 
 <script>
 const RACE_DATE = new Date('2026-10-18T00:00:00');
-const TODAY = new Date('2026-07-07T00:00:00');
+const TODAY = new Date();
+TODAY.setHours(0,0,0,0);
 
 const PHASES = {
   base:{label:'Aerobic Rebuild', cls:'phase-base'},
