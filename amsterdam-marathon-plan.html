@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amsterdam Marathon 2026 — Training Plan</title>
+<style>
+  :root{
+    --navy:#0b1a2b;
+    --panel:#12233a;
+    --panel-2:#182c47;
+    --line-green:#c8f31d;
+    --line-green-dim:#8fae17;
+    --text:#eaf0f6;
+    --text-dim:#9fb0c3;
+    --amber:#ff8a3d;
+    --mono: 'SF Mono', 'Roboto Mono', 'Courier New', monospace;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--navy);
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(200,243,29,0.06), transparent 45%),
+      radial-gradient(circle at 90% 20%, rgba(255,138,61,0.05), transparent 40%);
+    color:var(--text);
+    font-family:var(--sans);
+    padding:0 0 60px 0;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:28px 20px 0;}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:18px;margin-bottom:26px;}
+  .brand{font-family:var(--mono);letter-spacing:.14em;font-size:11px;color:var(--line-green);text-transform:uppercase;}
+  h1{font-size:22px;margin:4px 0 0;font-weight:700;letter-spacing:-.01em;}
+  .race-meta{font-family:var(--mono);font-size:12px;color:var(--text-dim);text-align:right;line-height:1.6;}
+  .race-meta b{color:var(--text);}
+
+  .countdown{font-family:var(--mono);font-size:12px;color:var(--amber);margin-top:2px;}
+
+  /* THIS WEEK card */
+  .card{
+    background:linear-gradient(180deg, var(--panel-2), var(--panel));
+    border:1px solid rgba(200,243,29,0.25);
+    border-radius:14px;
+    padding:22px 22px 18px;
+    margin-bottom:22px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute; top:0; left:0; bottom:0; width:4px;
+    background:var(--line-green);
+  }
+  .card-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--line-green);margin-bottom:2px;}
+  .card-week{font-size:13px;color:var(--text-dim);margin-bottom:16px;font-family:var(--mono);}
+
+  .stat-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px;}
+  .stat{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:10px;
+    padding:12px 16px;
+    flex:1;
+    min-width:130px;
+  }
+  .stat .num{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--text);line-height:1;}
+  .stat .num small{font-size:13px;font-weight:400;color:var(--text-dim);margin-left:4px;}
+  .stat .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);margin-top:6px;}
+  .stat.accent .num{color:var(--line-green);}
+
+  .sessions{display:grid;grid-template-columns:1fr;gap:10px;}
+  .sess{
+    background:rgba(0,0,0,0.18);
+    border-left:3px solid var(--amber);
+    border-radius:6px;
+    padding:10px 14px;
+  }
+  .sess.long{border-left-color:var(--line-green);}
+  .sess .tag{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);}
+  .sess.long .tag{color:var(--line-green);}
+  .sess .body{font-size:14px;margin-top:4px;color:var(--text);line-height:1.45;}
+  .notes{margin-top:14px;font-size:12.5px;color:var(--text-dim);font-style:italic;}
+
+  /* full table */
+  .section-title{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin:30px 0 10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;}
+  .section-title .chev{transition:transform .2s ease;}
+  .section-title.open .chev{transform:rotate(90deg);}
+  #fullPlan{display:none;}
+  #fullPlan.show{display:block;}
+
+  table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  th{text-align:left;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);padding:8px 8px;border-bottom:1px solid rgba(255,255,255,0.12);white-space:nowrap;}
+  td{padding:9px 8px;border-bottom:1px solid rgba(255,255,255,0.06);vertical-align:top;color:var(--text);}
+  tr.current td{background:rgba(200,243,29,0.07);}
+  tr.current td:first-child{border-left:3px solid var(--line-green);}
+  tr.past td{opacity:.45;}
+  td.wk{font-family:var(--mono);color:var(--text-dim);}
+  td.mi{font-family:var(--mono);font-weight:700;white-space:nowrap;}
+  td.phase{font-size:11px;color:var(--amber);white-space:nowrap;}
+  .scroll-x{overflow-x:auto;}
+
+  footer{margin-top:30px;font-family:var(--mono);font-size:10.5px;color:var(--text-dim);text-align:center;opacity:.6;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <div class="brand">Matt C — Marathon Build</div>
+      <h1>TCS Amsterdam Marathon 2026</h1>
+    </div>
+    <div class="race-meta">
+      <div>Race day: <b>Sun 18 Oct 2026</b></div>
+      <div>Goal: <b>Sub-2:36:00</b> · 5:57/mi · 3:42/km</div>
+      <div class="countdown" id="countdown"></div>
+    </div>
+  </header>
+
+  <div class="card" id="thisWeekCard"></div>
+
+  <div class="section-title" id="toggleTable">
+    <span>Full 12-week plan</span>
+    <span class="chev">▸</span>
+  </div>
+  <div id="fullPlan">
+    <div class="scroll-x">
+      <table>
+        <thead>
+          <tr>
+            <th>Wk</th><th>W/C</th><th>Phase</th><th>Primary session</th><th>Secondary session</th><th>Weekend / long run</th><th>Miles</th><th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="planBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>Source: Matt_C_-_Amsterdam_Marathon_2026.xlsx · open this file any time, the current week auto-updates</footer>
+</div>
+
+<script>
+const plan = [
+  {week:7, wc:"2026-07-27", phase:"MARATHON SUPPORTIVE", primary:"3 sets of (3',2',1',45\",30\") all off 60\" jog", secondary:"—", weekend:"Keep LR easy — followed Saturday track session of 2000/1600/1200/2×800/2×400", miles:"65?", notes:"Down week"},
+  {week:8, wc:"2026-08-03", phase:"MARATHON SUPPORTIVE", primary:"6×1600 @ 5:40 (85s), 400 float @ ~6:15 (94 laps)", secondary:"Reduce to 2× workout/week from here", weekend:"5k,4k,3k,2k,1k (15k total) @ 6:00/5:55/5:50/5:45/5:40, 2min recovery", miles:"75", notes:""},
+  {week:9, wc:"2026-08-10", phase:"MARATHON SUPPORTIVE", primary:"5×2k @ 5:30 pace (4' jog) — long fast run @ 90–95% MP", secondary:"—", weekend:"17M @ 6:40–6:30", miles:"85", notes:"Peak mileage block aims to culminate 5–6 weeks out from race"},
+  {week:10, wc:"2026-08-17", phase:"MARATHON SUPPORTIVE", primary:"AM: 7×1k @ 103–106% MP (1' jog); PM: 12×500 @ 108–110% MP (30\" walk)", secondary:"—", weekend:"12–13M @ 100% MP", miles:"90", notes:"Peak mileage"},
+  {week:11, wc:"2026-08-24", phase:"MARATHON SUPPORTIVE", primary:"10×(1k @ 105%, 1k @ 90% MP)", secondary:"—", weekend:"5-5-5-(3to5)M @ 90-92-94-96% MP", miles:"90", notes:"Peak mileage"},
+  {week:12, wc:"2026-08-31", phase:"MARATHON SUPPORTIVE", primary:"AM: 5–6×2k @ 103% (2' walk); PM: 4×500 @ 108–110% (30\" walk), then 3–5k @ 108–110%", secondary:"—", weekend:"6×(3k @ 100% MP, 1k @ 90% MP) / BEDFORD HM", miles:"65", notes:"Down week — deferred a week to fit Bedford HM"},
+  {week:13, wc:"2026-09-07", phase:"MARATHON SPECIFIC", primary:"4–5×3k @ 103–105% (2–3' walk)", secondary:"—", weekend:"20–22M @ 95% MP", miles:"90", notes:"Peak mileage"},
+  {week:14, wc:"2026-09-14", phase:"MARATHON SPECIFIC", primary:"AM: 3-2-1-1k @ 102–106% (2' walk); PM: 12–15×400 @ 108–110% (25s walk)", secondary:"—", weekend:"6×(4k @ 100% MP, 1k @ 90% MP)", miles:"75–80", notes:"Not too aggressive a taper — adjust as needed"},
+  {week:15, wc:"2026-09-21", phase:"MARATHON SPECIFIC", primary:"8–10×3' @ 104–107% MP (30\" jog)", secondary:"None", weekend:"SEAA 6-stage: 7-6-5-(2to4)M @ 92-94-96-98% MP", miles:"70–75", notes:""},
+  {week:16, wc:"2026-09-28", phase:"MARATHON SPECIFIC", primary:"12×500 @ 108–110% MP (30\" walk)", secondary:"—", weekend:"6-5-4-3-2-1km @ 98–102% with 1k @ 90% MP", miles:"67–72", notes:""},
+  {week:17, wc:"2026-10-05", phase:"TAPER", primary:"8×(1k @ 103–105% MP + 1k @ 92–94% MP)", secondary:"—", weekend:"2×2k @ 107% MP (3' jog); 2–4×1k @ 108–110% MP (3' jog)", miles:"60–65", notes:""},
+  {week:18, wc:"2026-10-12", phase:"RACE WEEK", primary:"6–8×3' @ 105–107% MP (45\" jog)", secondary:"—", weekend:"AMSTERDAM MARATHON — 18.10.26", miles:"—", notes:"Race week"},
+];
+
+function mondayOf(d){
+  const dt = new Date(d);
+  return dt;
+}
+
+function findCurrentWeek(){
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  for(let i=0;i<plan.length;i++){
+    const wcStart = new Date(plan[i].wc + "T00:00:00");
+    const nextStart = i+1 < plan.length ? new Date(plan[i+1].wc + "T00:00:00") : new Date(wcStart.getTime() + 7*86400000);
+    if(today >= wcStart && today < nextStart) return i;
+  }
+  if(today < new Date(plan[0].wc + "T00:00:00")) return 0;
+  return plan.length - 1;
+}
+
+function fmtDate(iso){
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString('en-GB', {weekday:'short', day:'numeric', month:'short'});
+}
+
+const idx = findCurrentWeek();
+const wk = plan[idx];
+
+// This week card
+const card = document.getElementById('thisWeekCard');
+const raceDate = new Date("2026-10-18T09:00:00");
+const now = new Date();
+const daysToRace = Math.ceil((raceDate - now) / 86400000);
+
+card.innerHTML = `
+  <div class="card-label">This week</div>
+  <div class="card-week">Week ${wk.week} of 18 · w/c ${fmtDate(wk.wc)} · ${wk.phase}</div>
+  <div class="stat-row">
+    <div class="stat accent">
+      <div class="num">${wk.miles}<small>mi</small></div>
+      <div class="lbl">Target mileage</div>
+    </div>
+    <div class="stat">
+      <div class="num">${daysToRace}</div>
+      <div class="lbl">Days to race</div>
+    </div>
+  </div>
+  <div class="sessions">
+    <div class="sess">
+      <div class="tag">Primary session</div>
+      <div class="body">${wk.primary}</div>
+    </div>
+    ${wk.secondary && wk.secondary !== "—" ? `<div class="sess"><div class="tag">Secondary</div><div class="body">${wk.secondary}</div></div>` : ""}
+    <div class="sess long">
+      <div class="tag">Weekend / long run</div>
+      <div class="body">${wk.weekend}</div>
+    </div>
+  </div>
+  ${wk.notes ? `<div class="notes">${wk.notes}</div>` : ""}
+`;
+
+document.getElementById('countdown').textContent = daysToRace > 0 ? `${daysToRace} days to go` : (daysToRace === 0 ? "Race day" : "Race complete");
+
+// Full table
+const body = document.getElementById('planBody');
+plan.forEach((w, i) => {
+  const tr = document.createElement('tr');
+  if(i === idx) tr.className = 'current';
+  else if(i < idx) tr.className = 'past';
+  tr.innerHTML = `
+    <td class="wk">${w.week}</td>
+    <td class="wk">${fmtDate(w.wc)}</td>
+    <td class="phase">${w.phase}</td>
+    <td>${w.primary}</td>
+    <td>${w.secondary}</td>
+    <td>${w.weekend}</td>
+    <td class="mi">${w.miles}</td>
+    <td>${w.notes}</td>
+  `;
+  body.appendChild(tr);
+});
+
+// Toggle
+const toggle = document.getElementById('toggleTable');
+const fullPlan = document.getElementById('fullPlan');
+toggle.addEventListener('click', () => {
+  fullPlan.classList.toggle('show');
+  toggle.classList.toggle('open');
+});
+</script>
+</body>
+</html>
